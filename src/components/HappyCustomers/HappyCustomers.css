@@ -1,0 +1,166 @@
+.happy-customers {
+  width: 100%;
+  padding: 70px 50px 80px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.happy-customers-header {
+  max-width: 1160px;
+  margin: 0 auto 35px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.happy-customers-header h2 {
+  margin: 0;
+
+  color: #000;
+  font-size: 40px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: -1.5px;
+}
+
+.review-arrows {
+  display: flex;
+  gap: 10px;
+}
+
+.review-arrows button {
+  width: 40px;
+  height: 40px;
+
+  border: none;
+  background: transparent;
+
+  color: #000;
+  font-size: 25px;
+
+  cursor: pointer;
+}
+
+.reviews-wrapper {
+  width: 100%;
+  max-width: 1160px;
+  margin: 0 auto;
+}
+
+.reviews-track {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.review-card {
+  min-height: 220px;
+  padding: 28px;
+
+  border: 1px solid #ddd;
+  border-radius: 18px;
+
+  background: #fff;
+}
+
+.review-stars {
+  margin-bottom: 12px;
+
+  color: #ffc633;
+  font-size: 17px;
+  letter-spacing: 2px;
+}
+
+.review-name {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  margin-bottom: 12px;
+}
+
+.review-name strong {
+  color: #000;
+  font-size: 16px;
+}
+
+.review-name span {
+  width: 18px;
+  height: 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #00b67a;
+  color: #fff;
+
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.review-card p {
+  margin: 0 0 18px;
+
+  color: #666;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.review-card small {
+  color: #888;
+  font-size: 12px;
+}
+
+@media (max-width: 900px) {
+  .happy-customers {
+    padding: 55px 30px 65px;
+  }
+
+  .happy-customers-header h2 {
+    font-size: 34px;
+  }
+
+  .reviews-track {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .review-card:nth-child(3) {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .happy-customers {
+    padding: 50px 20px 60px;
+  }
+
+  .happy-customers-header h2 {
+    max-width: 230px;
+    font-size: 28px;
+    line-height: 1.05;
+  }
+
+  .review-arrows button {
+    width: 32px;
+    height: 32px;
+    font-size: 20px;
+  }
+
+  .reviews-track {
+    grid-template-columns: 1fr;
+  }
+
+  .review-card:nth-child(2),
+  .review-card:nth-child(3) {
+    display: none;
+  }
+
+  .review-card {
+    min-height: auto;
+    padding: 22px;
+  }
+}

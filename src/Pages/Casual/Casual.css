@@ -1,0 +1,211 @@
+.casual-page {
+  width: 100%;
+  max-width: 1240px;
+
+  margin: 0 auto;
+  padding: 30px 30px 80px;
+}
+
+.breadcrumb {
+  margin-bottom: 25px;
+
+  color: #777;
+  font-size: 13px;
+}
+
+.breadcrumb span {
+  margin: 0 8px;
+}
+
+.casual-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 30px;
+}
+
+.casual-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.casual-heading {
+  margin-bottom: 24px;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.casual-heading h1 {
+  margin: 0 0 6px;
+
+  color: #000;
+  font-size: 34px;
+  font-weight: 900;
+}
+
+.casual-heading p {
+  margin: 0;
+
+  color: #777;
+  font-size: 13px;
+}
+
+.sort-area {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  color: #777;
+  font-size: 13px;
+}
+
+.sort-area select {
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #000;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.filter-title.selected {
+  color: #000;
+  font-weight: 700;
+}
+
+.no-products {
+  padding: 60px 20px;
+  text-align: center;
+  color: #777;
+}
+
+.sort-area button {
+  border: none;
+  background: transparent;
+
+  color: #000;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.casual-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px 16px;
+}
+
+.pagination {
+  margin-top: 45px;
+  padding-top: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-top: 1px solid #eee;
+}
+
+.pagination > button {
+  min-height: 38px;
+  padding: 0 18px;
+
+  border: 1px solid #ddd;
+  border-radius: 999px;
+
+  background: #fff;
+
+  cursor: pointer;
+}
+
+.pagination-numbers {
+  display: flex;
+  gap: 6px;
+}
+
+.pagination-numbers button {
+  width: 34px;
+  height: 34px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: transparent;
+
+  cursor: pointer;
+}
+
+.pagination-numbers button.active {
+  background: #f0f0f0;
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 1000px) {
+  .casual-layout {
+    gap: 20px;
+  }
+
+  .filter-sidebar {
+    width: 220px;
+  }
+
+  .casual-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+  .casual-page {
+    padding: 25px 18px 60px;
+  }
+
+  .casual-layout {
+    display: block;
+  }
+
+  .filter-sidebar {
+    width: 100%;
+    margin-bottom: 25px;
+  }
+
+  .casual-heading {
+    flex-direction: column;
+  }
+
+  .casual-heading h1 {
+    font-size: 30px;
+  }
+
+  .sort-area {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .casual-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 12px;
+  }
+
+  .pagination {
+    gap: 10px;
+  }
+
+  .pagination-numbers {
+    display: none;
+  }
+}
+
+@media (max-width: 450px) {
+  .casual-grid {
+    grid-template-columns: 1fr;
+  }
+}

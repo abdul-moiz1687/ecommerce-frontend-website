@@ -1,0 +1,224 @@
+.filter-sidebar {
+  width: 260px;
+  flex-shrink: 0;
+
+  padding: 22px;
+
+  border: 1px solid #e5e5e5;
+  border-radius: 18px;
+
+  background: #fff;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.filter-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding-bottom: 18px;
+
+  border-bottom: 1px solid #eee;
+}
+
+.filter-header h3 {
+  margin: 0;
+
+  font-size: 20px;
+}
+
+/* =========================
+   CATEGORY
+========================= */
+
+.filter-group {
+  padding: 15px 0;
+
+  border-bottom: 1px solid #eee;
+}
+
+.filter-title {
+  width: 100%;
+  padding: 8px 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border: none;
+  background: transparent;
+
+  color: #666;
+
+  font-size: 14px;
+  text-align: left;
+
+  cursor: pointer;
+
+  transition: color 0.2s ease;
+}
+
+.filter-title:hover,
+.filter-title.selected {
+  color: #000;
+  font-weight: 600;
+}
+
+/* =========================
+   FILTER SECTION
+========================= */
+
+.filter-section {
+  padding: 18px 0;
+
+  border-bottom: 1px solid #eee;
+}
+
+.filter-section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 15px;
+}
+
+.filter-section-title strong {
+  font-size: 15px;
+}
+
+/* =========================
+   PRICE
+========================= */
+
+.filter-section input[type="range"] {
+  width: 100%;
+
+  accent-color: #000;
+
+  cursor: pointer;
+}
+
+.price-values {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 8px;
+
+  color: #555;
+
+  font-size: 12px;
+}
+
+/* =========================
+   COLORS
+========================= */
+
+.color-options {
+  display: grid;
+  grid-template-columns: repeat(5, 28px);
+
+  gap: 12px;
+}
+
+.color-button {
+  width: 25px;
+  height: 25px;
+
+  padding: 0;
+
+  border: 2px solid transparent;
+  border-radius: 50%;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    outline 0.2s ease;
+}
+
+.color-button:hover {
+  transform: scale(1.08);
+}
+
+.color-button.active {
+  outline: 2px solid #000;
+  outline-offset: 3px;
+}
+
+/* =========================
+   SIZE
+========================= */
+
+.size-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.size-options button {
+  padding: 8px 12px;
+
+  border: none;
+  border-radius: 999px;
+
+  background: #f2f2f2;
+  color: #777;
+
+  font-size: 11px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.size-options button:hover {
+  background: #e5e5e5;
+}
+
+.size-options button.active {
+  background: #000;
+  color: #fff;
+}
+
+/* =========================
+   APPLY / RESET
+========================= */
+
+.apply-filter-btn {
+  width: 100%;
+  height: 45px;
+
+  margin-top: 18px;
+
+  border: none;
+  border-radius: 999px;
+
+  background: #000;
+  color: #fff;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: background 0.2s ease;
+}
+
+.apply-filter-btn:hover {
+  background: #222;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+  .filter-sidebar {
+    width: 100%;
+  }
+}

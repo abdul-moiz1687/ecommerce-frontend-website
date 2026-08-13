@@ -1,0 +1,148 @@
+.browse-dress-style {
+  width: 100%;
+  max-width: 1160px;
+
+  margin: 20px auto 80px;
+  padding: 70px 60px;
+
+  border-radius: 24px;
+
+  background: #f0f0f0;
+}
+
+.browse-dress-style h2 {
+  margin: 0 0 40px;
+
+  text-align: center;
+
+  color: #000;
+  font-size: 40px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: -1.5px;
+}
+
+/* =========================
+   GRID
+========================= */
+
+.dress-style-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.dress-style-card {
+  position: relative;
+
+  height: 290px;
+
+  overflow: hidden;
+
+  border-radius: 18px;
+
+  background: #fff;
+}
+
+.dress-style-card span {
+  position: absolute;
+
+  top: 25px;
+  left: 25px;
+
+  z-index: 2;
+
+  color: #000;
+
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.dress-style-card img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+  object-position: center;
+
+  transition: transform 0.35s ease;
+}
+
+.dress-style-card:hover img {
+  transform: scale(1.03);
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 900px) {
+  .browse-dress-style {
+    margin: 20px 30px 60px;
+    padding: 50px 35px;
+  }
+
+  .browse-dress-style h2 {
+    font-size: 34px;
+  }
+
+  .dress-style-card {
+    height: 240px;
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+  .browse-dress-style {
+    margin: 20px 16px 50px;
+    padding: 40px 20px;
+
+    border-radius: 20px;
+  }
+
+  .browse-dress-style h2 {
+    margin-bottom: 28px;
+
+    font-size: 28px;
+    line-height: 1.05;
+  }
+
+  .dress-style-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .dress-style-card {
+    height: 220px;
+  }
+
+  .dress-style-card span {
+    top: 18px;
+    left: 18px;
+
+    font-size: 18px;
+  }
+}
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 400px) {
+  .browse-dress-style {
+    padding: 32px 14px;
+  }
+
+  .dress-style-card {
+    height: 190px;
+  }
+}

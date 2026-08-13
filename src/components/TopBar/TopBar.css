@@ -1,0 +1,40 @@
+.top-bar {
+  position: relative;
+  width: 100%;
+  min-height: 38px;
+  padding: 9px 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #000;
+  color: #fff;
+
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.top-bar p {
+  margin: 0;
+  text-align: center;
+}
+
+.top-bar a {
+  color: #fff;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.top-bar-close {
+  position: absolute;
+  right: 50px;
+
+  border: none;
+  background: transparent;
+  color: #fff;
+
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}

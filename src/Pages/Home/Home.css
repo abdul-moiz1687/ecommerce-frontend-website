@@ -1,0 +1,96 @@
+/* =========================
+   NEW ARRIVALS / TOP SELLING
+========================= */
+
+.new-arrivals,
+.top-selling {
+  width: 100%;
+  padding: 70px 50px 80px;
+  background: #fff;
+}
+
+.top-selling {
+  border-top: 1px solid #eee;
+}
+
+.new-arrivals h2,
+.top-selling h2 {
+  margin: 0 0 45px;
+
+  text-align: center;
+
+  color: #000;
+  font-size: 40px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: -1.5px;
+}
+
+/* =========================
+   VIEW ALL
+========================= */
+
+.new-arrivals .view-all-btn,
+.top-selling .view-all-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 220px;
+  height: 50px;
+
+  margin: 45px auto 0;
+
+  border: 1px solid #dddddd;
+  border-radius: 999px;
+
+  background: #fff;
+  color: #000;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  text-decoration: none;
+  text-align: center;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.new-arrivals .view-all-btn:hover,
+.top-selling .view-all-btn:hover {
+  background: #000;
+  color: #fff;
+
+  border-color: #000;
+
+  transform: translateY(-1px);
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+  .new-arrivals,
+  .top-selling {
+    padding: 50px 20px 60px;
+  }
+
+  .new-arrivals h2,
+  .top-selling h2 {
+    margin-bottom: 30px;
+    font-size: 30px;
+  }
+
+  .new-arrivals .view-all-btn,
+  .top-selling .view-all-btn {
+    width: 100%;
+    margin-top: 35px;
+  }
+}

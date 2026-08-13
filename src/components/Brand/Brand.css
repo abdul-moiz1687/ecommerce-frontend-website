@@ -1,0 +1,70 @@
+.brand-strip {
+  width: 100%;
+  min-height: 95px;
+  padding: 20px 60px;
+
+  display: flex;
+  align-items: center;
+  flex: wrap;
+  justify-content: space-between;
+  gap: 35px;
+
+  background: #000;
+  color: #fff;
+  overflow: hidden;
+}
+
+.brand-strip span {
+  flex: 1;
+
+  text-align: center;
+  white-space: nowrap;
+
+  font-size: clamp(20px, 2.5vw, 34px);
+  font-weight: 500;
+  letter-spacing: -1px;
+}
+
+/* Brand-specific feel */
+
+.brand-strip span:nth-child(1) {
+  font-family: Georgia, serif;
+  font-style: italic;
+}
+
+.brand-strip span:nth-child(2) {
+  font-weight: 400;
+}
+
+.brand-strip span:nth-child(3) {
+  font-family: Georgia, serif;
+}
+
+.brand-strip span:nth-child(4) {
+  font-family: Georgia, serif;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.brand-strip span:nth-child(5) {
+  font-weight: 400;
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+  .brand-strip {
+    min-height: 75px;
+    padding: 18px 25px;
+
+    gap: 25px;
+
+    overflow-x: auto;
+    justify-content: flex-start;
+  }
+
+  .brand-strip span {
+    flex: 0 0 auto;
+    font-size: 20px;
+  }
+}

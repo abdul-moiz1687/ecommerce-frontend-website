@@ -90,8 +90,6 @@
   font-weight: 600;
 }
 
-/* Mobile */
-
 @media (max-width: 768px) {
   .product-card h3 {
     font-size: 14px;

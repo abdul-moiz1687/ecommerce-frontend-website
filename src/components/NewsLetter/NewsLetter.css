@@ -93,8 +93,6 @@
   cursor: pointer;
 }
 
-/* Tablet */
-
 @media (max-width: 900px) {
   .footer-wrapper {
     padding-top: 110px;
@@ -115,8 +113,6 @@
     max-width: 100%;
   }
 }
-
-/* Mobile */
 
 @media (max-width: 600px) {
   .footer-wrapper {

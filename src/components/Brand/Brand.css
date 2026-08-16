@@ -25,8 +25,6 @@
   letter-spacing: -1px;
 }
 
-/* Brand-specific feel */
-
 .brand-strip span:nth-child(1) {
   font-family: Georgia, serif;
   font-style: italic;
@@ -49,8 +47,6 @@
 .brand-strip span:nth-child(5) {
   font-weight: 400;
 }
-
-/* Mobile */
 
 @media (max-width: 768px) {
   .brand-strip {

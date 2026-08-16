@@ -5,15 +5,14 @@ function ProductGrid({ products }) {
   return (
     <div className="product-grid">
       {products.map((product) => (
-        <ProductCard
-          key={product.id}
+        <ProductCard key={product.id}
+          id={product.id}
           image={product.image}
           title={product.title}
           price={product.price}
           oldPrice={product.oldPrice}
           discount={product.discount}
-          rating={product.rating}
-        />
+          rating={product.rating}   />
       ))}
     </div>
   );

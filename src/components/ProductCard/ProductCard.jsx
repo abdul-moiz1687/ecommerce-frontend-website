@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
 import "./ProductsCard.css";
 
-function ProductCard({
-  id,
-  image,
+function ProductCard({id,
+   image,
   title,
   price,
   oldPrice,
@@ -19,7 +18,7 @@ function ProductCard({
       <h3>{title}</h3>
 
       <div className="product-rating">
-        <span className="stars">★★★★★</span>
+        <span className="stars">★★★★★   </span>
         <span className="rating-number">{rating}/5</span>
       </div>
 

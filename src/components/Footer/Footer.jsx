@@ -9,10 +9,8 @@ function Footer() {
         <div className="footer-brand">
           <h2>SHOP.CO</h2>
 
-          <p>
-            We have clothes that suits your style and which you’re proud to
-            wear. From women to men.
-          </p>
+          <p>  We have clothes that suits your style and which you’re proud to
+            wear. From women to men. </p>
 
           <div className="footer-socials">
             <a href="#" aria-label="Twitter">

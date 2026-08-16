@@ -18,23 +18,23 @@ const colors = [
 const dressStyles = ["Casual", "Formal", "Party", "Gym"];
 
 function FilterSidebar({
-  selectedCategory,
-  setSelectedCategory,
+   selectedCategory,
+   setSelectedCategory,
   maxPrice,
   setMaxPrice,
   selectedSize,
-  setSelectedSize,
+   setSelectedSize,
   selectedColor,
   setSelectedColor,
-  selectedDressStyle,
-  setSelectedDressStyle,
-  resetFilters,
+     selectedDressStyle,
+      setSelectedDressStyle,
+   resetFilters,
 }) {
   return (
-    <aside className="filter-sidebar">
+       <aside className="filter-sidebar">
       <div className="filter-header">
         <h3>Filters</h3>
-        <span>☷</span>
+               <span>☷</span>
       </div>
 
       <div className="filter-group">
@@ -48,11 +48,9 @@ function FilterSidebar({
               setSelectedCategory(
                 selectedCategory === category ? "" : category
               )
-            }
-          >
+            }  >
             {category}
-            <span>›</span>
-          </button>
+            <span>›</span>   </button>
         ))}
       </div>
 
@@ -94,10 +92,8 @@ function FilterSidebar({
               onClick={() =>
                 setSelectedColor(
                   selectedColor === color.value ? "" : color.value
-                )
-              }
-            />
-          ))}
+                )  }/>
+      ))}
         </div>
       </div>
 
@@ -130,20 +126,18 @@ function FilterSidebar({
 
         {dressStyles.map((style) => (
           <button
-            key={style}
+        key={style}
             className={`filter-title ${
-              selectedDressStyle === style ? "selected" : ""
-            }`}
+       selectedDressStyle === style ? "selected" : ""
+        }`}
             onClick={() =>
-              setSelectedDressStyle(
+        setSelectedDressStyle(
                 selectedDressStyle === style ? "" : style
               )
-            }
-          >
+            }  >
             {style}
             <span>›</span>
-          </button>
-        ))}
+          </button>  ))}
       </div>
 
       <button className="apply-filter-btn" onClick={resetFilters}>
@@ -152,5 +146,4 @@ function FilterSidebar({
     </aside>
   );
 }
-
 export default FilterSidebar;

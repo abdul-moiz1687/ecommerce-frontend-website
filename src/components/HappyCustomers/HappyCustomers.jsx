@@ -3,13 +3,13 @@ import { reviews } from "../../data/reviews";
 import "./HappyCustomers.css";
 
 function HappyCustomers() {
-  const [currentIndex, setCurrentIndex] = useState(0);
+     const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextReviews = () => {
     setCurrentIndex((prev) => {
       if (prev + 3 >= reviews.length) {
         return 0;
-      }
+  }
 
       return prev + 1;
     });
@@ -19,9 +19,9 @@ function HappyCustomers() {
     setCurrentIndex((prev) => {
       if (prev === 0) {
         return reviews.length - 3;
-      }
+     }
 
-      return prev - 1;
+   return prev - 1;
     });
   };
 
@@ -39,37 +39,32 @@ function HappyCustomers() {
         <div className="review-arrows">
           <button
             onClick={previousReviews}
-            aria-label="Previous reviews"
-          >
-            ←
-          </button>
+            aria-label="Previous reviews"  >
+            ←   </button>
 
           <button
             onClick={nextReviews}
-            aria-label="Next reviews"
-          >
-            →
-          </button>
+            aria-label="Next reviews"  >
+            →   </button>
         </div>
       </div>
 
       <div className="reviews-wrapper">
         <div className="reviews-track">
-          {visibleReviews.map((review) => (
+    {visibleReviews.map((review) => (
             <article className="review-card" key={review.id}>
-              <div className="review-stars">
+        <div className="review-stars">
                 {"★".repeat(review.rating)}
-              </div>
+          </div>
 
               <div className="review-name">
-                <strong>{review.name}</strong>
+       <strong>{review.name}</strong>
                 <span>✓</span>
-              </div>
+          </div>
 
-              <p>{review.text}</p>
-
-              <small>{review.date}</small>
-            </article>
+           <p>{review.text}</p>
+       <small>{review.date}</small>
+         </article>
           ))}
         </div>
       </div>

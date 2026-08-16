@@ -17,11 +17,27 @@
   gap: 40px;
 }
 
+.menu-btn {
+  display: none;
+
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #000;
+
+  cursor: pointer;
+
+  align-items: center;
+  justify-content: center;
+}
+
 .logo {
   color: #000;
+
   font-size: 32px;
   font-weight: 900;
   letter-spacing: -1.5px;
+
   text-decoration: none;
 }
 
@@ -33,7 +49,9 @@
 
 .nav-links a {
   color: #000;
+
   font-size: 16px;
+
   text-decoration: none;
 }
 
@@ -41,6 +59,7 @@
   flex: 1;
   max-width: 580px;
   height: 46px;
+
   padding: 0 18px;
 
   display: flex;
@@ -49,13 +68,16 @@
 
   background-color: #f2f0f1;
   border-radius: 999px;
+
   color: #666;
 }
 
 .navbar-search input {
   width: 100%;
+
   border: none;
   outline: none;
+
   background: transparent;
 
   font-size: 15px;
@@ -72,23 +94,67 @@
   gap: 18px;
 }
 
-.navbar-actions button,
-.menu-btn {
+.navbar-actions button {
   padding: 0;
+
   border: none;
   background: transparent;
+
   color: #000;
+
   cursor: pointer;
+
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
-.menu-btn,
-.mobile-search {
-  display: none;
+.cart-link {
+  position: relative;
+
+  width: 24px;
+  height: 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #000;
+
+  text-decoration: none;
+
+  font-size: 20px;
 }
 
-/* Tablet */
+.cart-link i {
+  font-size: 20px;
+}
+
+.cart-count {
+  position: absolute;
+
+  top: -8px;
+  right: -9px;
+
+  min-width: 18px;
+  height: 18px;
+
+  padding: 0 4px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #000;
+  color: #fff;
+
+  font-size: 10px;
+  font-weight: 600;
+}
+
+
 @media (max-width: 1000px) {
   .navbar {
     padding: 0 30px;
@@ -105,9 +171,13 @@
   .navbar-search {
     max-width: 400px;
   }
+
+  .logo {
+    font-size: 28px;
+  }
 }
 
-/* Mobile */
+
 @media (max-width: 768px) {
   .navbar {
     min-height: 64px;
@@ -118,7 +188,6 @@
   .navbar-left {
     gap: 12px;
   }
-
   .menu-btn {
     display: flex;
   }
@@ -135,9 +204,5 @@
   .navbar-actions {
     margin-left: auto;
     gap: 14px;
-  }
-
-  .mobile-search {
-    display: flex;
   }
 }

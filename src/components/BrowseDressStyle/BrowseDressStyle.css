@@ -22,19 +22,11 @@
   letter-spacing: -1.5px;
 }
 
-/* =========================
-   GRID
-========================= */
-
 .dress-style-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
 }
-
-/* =========================
-   CARD
-========================= */
 
 .dress-style-card {
   position: relative;
@@ -78,10 +70,6 @@
   transform: scale(1.03);
 }
 
-/* =========================
-   TABLET
-========================= */
-
 @media (max-width: 900px) {
   .browse-dress-style {
     margin: 20px 30px 60px;
@@ -96,10 +84,6 @@
     height: 240px;
   }
 }
-
-/* =========================
-   MOBILE
-========================= */
 
 @media (max-width: 600px) {
   .browse-dress-style {
@@ -132,10 +116,6 @@
     font-size: 18px;
   }
 }
-
-/* =========================
-   SMALL MOBILE
-========================= */
 
 @media (max-width: 400px) {
   .browse-dress-style {

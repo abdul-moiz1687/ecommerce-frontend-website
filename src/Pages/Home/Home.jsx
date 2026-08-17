@@ -4,12 +4,26 @@ import ProductGrid from "../../components/ProductGrid/ProductGrid";
 import BrowseDressStyle from "../../components/BrowseDressStyle/BrowseDressStyle";
 import HappyCustomers from "../../components/HappyCustomers/HappyCustomers";
 
-import { products } from "../../data/products";
+import { useEffect, useState } from "react";
+import { getProducts } from "../../services/productService";
+// import { products } from "../../data/products";
 import { Link } from "react-router-dom";
 
 import "./Home.css";
 
 function Home() {
+const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    getProducts()
+      .then((data) => {
+        setProducts(data);
+      })
+      .catch((error) => {
+        console.error("Failed to load products:", error);
+      });
+  }, []);
+
  const newArrivals = products.slice(0, 4);
 const topSelling = products.slice(4, 8);
 

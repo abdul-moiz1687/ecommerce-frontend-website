@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { products } from "../../data/products";
+import { getProductById, getProducts } from "../../services/productService";
 import { reviews } from "../../data/reviews";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import { useCart } from "../../context/CartContext";
@@ -11,36 +11,54 @@ import "./ProductDetails.css";
 function ProductDetails() {
   const { id } = useParams();
 
-  const product = products.find(
-    (item) => item.id === Number(id) );
+  const [product, setProduct] = useState(null);
+  const [products, setProducts] = useState([]);
 
-  const [selectedSize, setSelectedSize] = useState(
-    product?.sizes?.[2] || "Large"
-  );
-
-  const [selectedColor, setSelectedColor] = useState(
-    product?.colors?.[0] || ""
-  );
-
-const { addToCart } = useCart();
-
+  const [selectedSize, setSelectedSize] = useState("");
+  const [selectedColor, setSelectedColor] = useState("");
   const [quantity, setQuantity] = useState(1);
-
   const [activeTab, setActiveTab] = useState("reviews");
-
   const [visibleReviews, setVisibleReviews] = useState(6);
+  const [selectedImage, setSelectedImage] = useState(null);
 
-  const [selectedImage, setSelectedImage] = useState(
-    product?.image || ""
-  );
+  const { addToCart } = useCart();
+
+  useEffect(() => {
+    getProductById(id)
+      .then((data) => {
+        setProduct(data);
+      })
+      .catch((error) => {
+        console.error("Failed to load product:", error);
+        setProduct(null);
+      });
+
+    getProducts()
+      .then((data) => {
+        setProducts(data);
+      })
+      .catch((error) => {
+        console.error("Failed to load products:", error);
+      });
+  }, [id]);
+
+  useEffect(() => {
+    if (product) {
+      setSelectedSize(product.sizes?.[2] || product.sizes?.[0] || "");
+      setSelectedColor(product.colors?.[0] || "");
+      setSelectedImage(product.image || "");
+    }
+  }, [product]);
 
   if (!product) {
     return (
       <main className="product-not-found">
-        <h1>Product not found</h1>
+        <h1>Loading product...</h1>
       </main>
-    ); }
- const productReviews = reviews.slice(0, visibleReviews);
+    );
+  }
+
+  const productReviews = reviews.slice(0, visibleReviews);
 
   const relatedProducts = products
     .filter((item) => item.id !== product.id)
@@ -77,16 +95,23 @@ const { addToCart } = useCart();
                       ? "active"
                       : ""
                   }`}
-                  onClick={() => setSelectedImage(image)}  >
-        <img src={image} alt={`${product.title} ${index + 1}`} />
-                </button> ))}
+                  onClick={() => setSelectedImage(image)}
+                >
+                  <img
+                    src={image}
+                    alt={`${product.title} ${index + 1}`}
+                  />
+                </button>
+              )
+            )}
           </div>
 
-    <div className="product-main-image">
-            <img
-              src={selectedImage}
-              alt={product.title}  />
-    </div>
+          <div className="product-main-image">
+           <img
+  src={selectedImage || product.image}
+  alt={product.title}
+/>
+          </div>
         </div>
 
         <div className="product-info">
@@ -100,16 +125,16 @@ const { addToCart } = useCart();
           <div className="detail-price">
             <strong>${product.price}</strong>
 
-            {product.oldPrice && (
-              <del>${product.oldPrice}</del>   )}
+            {product.oldPrice && <del>${product.oldPrice}</del>}
 
-            {product.discount && (
-              <span>{product.discount}</span>  )}
+            {product.discount && <span>{product.discount}</span>}
           </div>
 
-          <p className="product-description"> This graphic t-shirt is perfect for any occasion.
+          <p className="product-description">
+            This graphic t-shirt is perfect for any occasion.
             Crafted from a soft and breathable fabric, it offers
-            superior comfort and style.</p>
+            superior comfort and style.
+          </p>
 
           <div className="product-option">
             <h3>Select Colors</h3>
@@ -123,7 +148,9 @@ const { addToCart } = useCart();
                   }`}
                   style={{ backgroundColor: color }}
                   onClick={() => setSelectedColor(color)}
-                  aria-label={`Select color ${color}`}     /> ))}
+                  aria-label={`Select color ${color}`}
+                />
+              ))}
             </div>
           </div>
 
@@ -134,9 +161,12 @@ const { addToCart } = useCart();
               {product.sizes?.map((size) => (
                 <button
                   key={size}
-                  className={
-                    selectedSize === size ? "selected" : "" } onClick={() => setSelectedSize(size)}>
-                  {size} </button>  ))}
+                  className={selectedSize === size ? "selected" : ""}
+                  onClick={() => setSelectedSize(size)}
+                >
+                  {size}
+                </button>
+              ))}
             </div>
           </div>
 
@@ -147,12 +177,19 @@ const { addToCart } = useCart();
               <button onClick={increaseQuantity}>+</button>
             </div>
 
-  <button className="add-cart-btn"  onClick={() =>
-    addToCart(
-      product,
-      quantity,
-      selectedSize,
-      selectedColor  )}>  Add to Cart</button>
+            <button
+              className="add-cart-btn"
+              onClick={() =>
+                addToCart(
+                  product,
+                  quantity,
+                  selectedSize,
+                  selectedColor
+                )
+              }
+            >
+              Add to Cart
+            </button>
           </div>
         </div>
       </section>
@@ -161,25 +198,35 @@ const { addToCart } = useCart();
         <div className="tabs-header">
           <button
             className={activeTab === "details" ? "active" : ""}
-            onClick={() => setActiveTab("details")}>
-            Product Details  </button>
+            onClick={() => setActiveTab("details")}
+          >
+            Product Details
+          </button>
 
           <button
             className={activeTab === "reviews" ? "active" : ""}
-            onClick={() => setActiveTab("reviews")}  >Rating & Reviews </button>
+            onClick={() => setActiveTab("reviews")}
+          >
+            Rating & Reviews
+          </button>
 
           <button
             className={activeTab === "faq" ? "active" : ""}
-            onClick={() => setActiveTab("faq")}  > FAQs</button>
+            onClick={() => setActiveTab("faq")}
+          >
+            FAQs
+          </button>
         </div>
 
         {activeTab === "details" && (
           <div className="tab-content">
             <h2>Product Details</h2>
 
-            <p> This product is designed with comfort and everyday
+            <p>
+              This product is designed with comfort and everyday
               style in mind. It features quality materials and a
-              modern fit suitable for different occasions. </p>
+              modern fit suitable for different occasions.
+            </p>
           </div>
         )}
 
@@ -188,8 +235,7 @@ const { addToCart } = useCart();
             <div className="reviews-heading">
               <div>
                 <h2>
-                  All Reviews{" "}
-                  <span>({reviews.length})</span>
+                  All Reviews <span>({reviews.length})</span>
                 </h2>
               </div>
 
@@ -197,7 +243,8 @@ const { addToCart } = useCart();
                 <button>Sort</button>
                 <button>Latest⌄</button>
                 <button className="write-review-btn">
-                  Write a Review </button>
+                  Write a Review
+                </button>
               </div>
             </div>
 
@@ -205,15 +252,18 @@ const { addToCart } = useCart();
               {productReviews.map((review) => (
                 <article
                   className="product-review-card"
-                  key={review.id}   >
+                  key={review.id}
+                >
                   <div className="review-stars">
                     {"★".repeat(review.rating)}
                   </div>
 
                   <h3>
                     {review.name}
-                    <span>✓</span> </h3>
- <p>{review.text}</p>
+                    <span>✓</span>
+                  </h3>
+
+                  <p>{review.text}</p>
 
                   <small>{review.date}</small>
                 </article>
@@ -221,8 +271,12 @@ const { addToCart } = useCart();
             </div>
 
             {visibleReviews < reviews.length && (
-              <button   className="load-more-btn"   onClick={handleLoadMore}    >
-                Load More Reviews</button>
+              <button
+                className="load-more-btn"
+                onClick={handleLoadMore}
+              >
+                Load More Reviews
+              </button>
             )}
           </div>
         )}
@@ -234,8 +288,8 @@ const { addToCart } = useCart();
             <div className="faq-item">
               <strong>What sizes are available?</strong>
               <p>
-                Sizes depend on the selected product and are
-                shown above.
+                Sizes depend on the selected product and are shown
+                above.
               </p>
             </div>
 
@@ -249,7 +303,6 @@ const { addToCart } = useCart();
         )}
       </section>
 
-      {/*this is th  Related Products */}
       <section className="related-products">
         <h2>YOU MIGHT ALSO LIKE</h2>
 

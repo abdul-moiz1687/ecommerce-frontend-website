@@ -1,7 +1,8 @@
 import {useEffect, useMemo, useState } from "react";
+import { getProducts } from "../../services/productService";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import FilterSidebar from "../../components/FilterSidebar/FilterSidebar";
-import { products } from "../../data/products";
+// import { products } from "../../data/products";
 
   import "./Casual.css";
 
@@ -14,6 +15,17 @@ function Casual() {
   const [sortBy, setSortBy] = useState("popular");
 
   const [currentPage, setCurrentPage] = useState(1);
+
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+  getProducts()
+    .then((data) => {
+      setProducts(data);
+    })
+    .catch((error) => {
+      console.error("Failed to load products:", error);
+    });
+}, []);
 
 const productsPerPage = 9;
 
@@ -62,6 +74,7 @@ const productsPerPage = 9;
     selectedColor,
     selectedDressStyle,
     sortBy,
+     products
   ]);
 
     useEffect(() => {

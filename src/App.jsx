@@ -9,6 +9,9 @@ import Casual from "./Pages/Casual/Casual";
 import ProductDetails from "./Pages/ProductDetails/ProductDetails";
 import Cart from "./Pages/Cart/Cart";
 
+import Signup from "./Pages/Signup/Signup";
+import Login from "./Pages/Login/Login";
+
 function App() {
   return (
     <div>
@@ -21,6 +24,9 @@ function App() {
        <Route path="/product/:id"
   element={<ProductDetails />}/>
   <Route path="/cart" element={<Cart />} />
+
+  <Route path="/signup" element={<Signup />} />
+<Route path="/login" element={<Login />} />
       </Routes>
 
       <div className="footer-wrapper">

@@ -1,10 +1,14 @@
+import { useState } from "react";
 import { Search, ShoppingCart, UserRound, Menu } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
+import { useAuth } from "../../context/AuthContext";
 import "./Navbar.css";
 
 function Navbar() {
   const { cartCount } = useCart();
+   const { user, logout } = useAuth();
+      const [accountOpen, setAccountOpen] = useState(false);
   return (
     <nav className="navbar">
       <div className="navbar-left">
@@ -37,9 +41,61 @@ function Navbar() {
               <span className="cart-count">{cartCount}</span> )}
         </Link>
 
-        <button aria-label="Account">
-          <UserRound size={22} />
-        </button>
+{/* ACCOUNT */}
+<div className="account-area">
+
+  {user ? (
+    <>
+      <button
+        className="account-link"
+        aria-label="Account"
+        onClick={() => setAccountOpen(!accountOpen)}
+      >
+        <span className="user-circle">
+          {user.name.charAt(0).toUpperCase()}
+        </span>
+      </button>
+
+      {accountOpen && (
+        <div className="account-menu">
+          <Link
+            to="/signup"
+            onClick={() => setAccountOpen(false)}
+          >
+            Create Account
+          </Link>
+
+          <Link
+            to="/login"
+            onClick={() => setAccountOpen(false)}
+          >
+            Login
+          </Link>
+
+          <button
+            className="logout-btn"
+            onClick={() => {
+              logout();
+              setAccountOpen(false);
+            }}
+          >
+            Logout
+          </button>
+        </div>
+      )}
+    </>
+  ) : (
+    <Link
+      to="/signup"
+      className="account-link"
+      aria-label="Create Account"
+    >
+      <UserRound size={22} />
+    </Link>
+  )}
+
+</div>
+      
       </div>
     </nav>
   );

@@ -94,6 +94,128 @@
   gap: 18px;
 }
 
+/* ================= ACCOUNT MENU START ================= */
+
+.account-area {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* User icon / avatar button */
+.account-link {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.account-link:hover {
+  background-color: #f2f0f1;
+}
+
+.account-link:active {
+  transform: scale(0.95);
+}
+
+/* User initial circle */
+.user-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #000;
+  color: #fff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+
+  user-select: none;
+}
+
+/* Dropdown */
+.account-menu {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+
+  width: 180px;
+  padding: 8px;
+
+  background: #fff;
+  border: 1px solid #e7e7e7;
+  border-radius: 14px;
+
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.14);
+
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  z-index: 1000;
+}
+
+/* Dropdown links */
+.account-menu a,
+.account-menu .logout-btn {
+  width: 100%;
+  min-height: 42px;
+
+  padding: 10px 12px;
+
+  border: none;
+  border-radius: 9px;
+
+  background: transparent;
+  color: #111;
+
+  display: flex;
+  align-items: center;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  text-decoration: none;
+  cursor: pointer;
+
+  transition: background-color 0.2s ease, padding-left 0.2s ease;
+}
+
+.account-menu a:hover,
+.account-menu .logout-btn:hover {
+  background-color: #f2f0f1;
+  padding-left: 16px;
+}
+
+/* Logout */
+.account-menu .logout-btn {
+  font-family: inherit;
+  text-align: left;
+}
+
+/* Keyboard accessibility */
+.account-link:focus-visible,
+.account-menu a:focus-visible,
+.account-menu .logout-btn:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 2px;
+}
+
+/* ================= ACCOUNT MENU END ================= */
+
 .navbar-actions button {
   padding: 0;
 
@@ -204,5 +326,29 @@
   .navbar-actions {
     margin-left: auto;
     gap: 14px;
+  }
+
+    /* Mobile account menu */
+  .account-menu {
+    top: calc(100% + 10px);
+    right: -4px;
+    width: 170px;
+  }
+
+  .account-menu a,
+  .account-menu .logout-btn {
+    min-height: 44px;
+    font-size: 14px;
+  }
+
+  .user-circle {
+    width: 34px;
+    height: 34px;
+    font-size: 14px;
+  }
+
+  .account-link {
+    width: 38px;
+    height: 38px;
   }
 }

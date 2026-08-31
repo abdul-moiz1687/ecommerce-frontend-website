@@ -1,5 +1,6 @@
 const API_URL = "https://ecommerce-backend-nine-phi-57.vercel.app/api/products";
 
+
 export async function getProducts() {
   const response = await fetch(API_URL);
 

@@ -48,7 +48,7 @@ function Login() {
       }
 
       // Save user in AuthContext and localStorage
-      login(data.user);
+      login(data.user, data.token);
 
       setMessage(data.message);
 

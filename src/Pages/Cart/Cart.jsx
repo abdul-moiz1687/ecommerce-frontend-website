@@ -1,120 +1,379 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+
 import { useCart } from "../../context/CartContext";
 import "./Cart.css";
 
+const API_URL = "https://ecommerce-backend-nine-phi-57.vercel.app";
+
 function Cart() {
-  const { cartItems,
+  const navigate = useNavigate();
+
+  const {
+    cartItems,
     subtotal,
     removeFromCart,
-    updateQuantity, } = useCart();
+    updateQuantity,
+    clearCart,
+  } = useCart();
+
+  const [checkoutLoading, setCheckoutLoading] =
+    useState(false);
+
+  const [checkoutMessage, setCheckoutMessage] =
+    useState("");
+
+  const [checkoutError, setCheckoutError] =
+    useState("");
 
   const discount = subtotal * 0.2;
-  const deliveryFee = subtotal > 0 ? 15 : 0;
-  const total = subtotal - discount + deliveryFee;
 
-  const handleCheckout = () => {
-  alert(
-    `Checkout started. Your order contains ${cartItems.length} item(s) with a total of 
-    $${total.toFixed( 2 )}.` );};
+  const deliveryFee =
+    subtotal > 0 ? 15 : 0;
+
+  const total =
+    subtotal -
+    discount +
+    deliveryFee;
+
+  const handleCheckout = async () => {
+    setCheckoutMessage("");
+    setCheckoutError("");
+
+    const token =
+      localStorage.getItem("token");
+
+    if (!token) {
+      alert(
+        "Please login before placing an order."
+      );
+
+      navigate("/login");
+
+      return;
+    }
+
+    if (cartItems.length === 0) {
+      setCheckoutError(
+        "Your cart is empty."
+      );
+
+      return;
+    }
+
+    try {
+      setCheckoutLoading(true);
+
+      const orderItems = cartItems.map(
+        (item) => ({
+          productId:
+            item.product.id,
+
+          title:
+            item.product.title,
+
+          image:
+            item.product.image || "",
+
+          price:
+            Number(item.product.price),
+
+          quantity:
+            item.quantity,
+        })
+      );
+
+      const response = await fetch(
+        `${API_URL}/api/orders`,
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json",
+
+            Authorization:
+              `Bearer ${token}`,
+          },
+
+          body: JSON.stringify({
+            items: orderItems,
+
+            totalAmount:
+              Number(total.toFixed(2)),
+
+            shippingAddress:
+              "Karachi, Pakistan",
+          }),
+        }
+      );
+
+      const data =
+        await response.json();
+
+      if (response.status === 401) {
+        localStorage.removeItem(
+          "token"
+        );
+
+        localStorage.removeItem(
+          "user"
+        );
+
+        alert(
+          "Your session has expired. Please login again."
+        );
+
+        navigate("/login");
+
+        return;
+      }
+
+      if (!response.ok) {
+        throw new Error(
+          data.message ||
+            "Failed to place order"
+        );
+      }
+
+      clearCart();
+
+      setCheckoutMessage(
+        "Order placed successfully!"
+      );
+    } catch (error) {
+      console.error(
+        "Checkout error:",
+        error
+      );
+
+      setCheckoutError(
+        error.message
+      );
+    } finally {
+      setCheckoutLoading(false);
+    }
+  };
+
   return (
     <main className="cart-page">
+
       <div className="cart-breadcrumb">
-        Home <span>›</span> Cart </div>
+        Home <span>›</span> Cart
+      </div>
 
       <h1>YOUR CART</h1>
 
-   {cartItems.length === 0 ? (
+      {checkoutMessage && (
+        <div className="checkout-success">
+          {checkoutMessage}
+        </div>
+      )}
+
+      {checkoutError && (
+        <div className="checkout-error">
+          {checkoutError}
+        </div>
+      )}
+
+      {cartItems.length === 0 ? (
+
         <div className="empty-cart">
-          <h2>Your cart is empty</h2>
+
+          <h2>
+            {checkoutMessage
+              ? "Order placed successfully"
+              : "Your cart is empty"}
+          </h2>
 
           <Link to="/casual">
             Continue Shopping
           </Link>
-        </div>  ) : (
+
+        </div>
+
+      ) : (
 
         <div className="cart-layout">
+
+          {/* CART ITEMS */}
+
           <section className="cart-items">
+
             {cartItems.map((item) => (
-              <article className="cart-item" key={item.id}>
+
+              <article
+                className="cart-item"
+                key={item.id}
+              >
+
                 <img
                   src={item.product.image}
-                  alt={item.product.title} />
+                  alt={item.product.title}
+                />
 
-        <div className="cart-item-info">
-            <h3>{item.product.title}</h3>
+                <div className="cart-item-info">
 
-                  <p>  Size: <strong>{item.size}</strong> </p>
+                  <h3>
+                    {item.product.title}
+                  </h3>
 
- <p>   Color: <strong>{item.color}</strong>
+                  <p>
+                    Size:{" "}
+                    <strong>
+                      {item.size}
+                    </strong>
+                  </p>
+
+                  <p>
+                    Color:{" "}
+                    <strong>
+                      {item.color}
+                    </strong>
                   </p>
 
                   <strong className="cart-item-price">
-                    ${item.product.price} </strong>
+                    ${item.product.price}
+                  </strong>
+
                 </div>
 
                 <div className="cart-item-actions">
+
                   <button
                     className="remove-btn"
                     onClick={() =>
                       removeFromCart(item.id)
-                    }>  Remove</button>
+                    }
+                  >
+                    Remove
+                  </button>
 
                   <div className="quantity-control">
-                    <button   onClick={() =>
+
+                    <button
+                      onClick={() =>
                         updateQuantity(
                           item.id,
                           item.quantity - 1
-                        )  }>    − </button>
+                        )
+                      }
+                    >
+                      −
+                    </button>
 
-                    <span>{item.quantity}</span>
+                    <span>
+                      {item.quantity}
+                    </span>
 
-            <button  onClick={() =>
+                    <button
+                      onClick={() =>
                         updateQuantity(
                           item.id,
-                          item.quantity + 1 ) }>+</button></div>
+                          item.quantity + 1
+                        )
+                      }
+                    >
+                      +
+                    </button>
+
+                  </div>
+
                 </div>
+
               </article>
-   ))}
+
+            ))}
+
           </section>
 
-          <aside className="cart-summary">
-            <h2>Order Summary</h2>
+          {/* SUMMARY */}
 
-     <div>
-              <span>Subtotal</span>
-              <strong>${subtotal.toFixed(2)}</strong>
+          <aside className="cart-summary">
+
+            <h2>
+              Order Summary
+            </h2>
+
+            <div>
+              <span>
+                Subtotal
+              </span>
+
+              <strong>
+                ${subtotal.toFixed(2)}
+              </strong>
             </div>
 
             <div>
-        <span>Discount</span>
+              <span>
+                Discount
+              </span>
+
               <strong className="discount">
                 -${discount.toFixed(2)}
               </strong>
             </div>
 
             <div>
-              <span>Delivery Fee</span>
-              <strong>${deliveryFee.toFixed(2)}</strong>
+              <span>
+                Delivery Fee
+              </span>
+
+              <strong>
+                ${deliveryFee.toFixed(2)}
+              </strong>
             </div>
 
-        <hr />
+            <hr />
 
             <div className="cart-total">
-              <span>Total</span>
-              <strong>${total.toFixed(2)}</strong>
+
+              <span>
+                Total
+              </span>
+
+              <strong>
+                ${total.toFixed(2)}
+              </strong>
+
             </div>
 
             <div className="promo-row">
+
               <input
                 type="text"
-                placeholder="Add promo code" />
+                placeholder="Add promo code"
+              />
 
-              <button>Apply</button>
+              <button>
+                Apply
+              </button>
+
             </div>
 
-            <button className="checkout-btn"   onClick={handleCheckout}>   Go to Checkout → </button>
+            <button
+              className="checkout-btn"
+              onClick={
+                handleCheckout
+              }
+              disabled={
+                checkoutLoading
+              }
+            >
+              {checkoutLoading
+                ? "Placing Order..."
+                : "Go to Checkout →"}
+            </button>
+
           </aside>
+
         </div>
+
       )}
+
     </main>
-  );}export default Cart;
+  );
+}
+
+export default Cart;

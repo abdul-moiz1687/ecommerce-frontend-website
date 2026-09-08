@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ecommerce-frontend-website-nyrk.vercel.app/sitemap.xml

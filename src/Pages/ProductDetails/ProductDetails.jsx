@@ -50,6 +50,72 @@ function ProductDetails() {
     }
   }, [product]);
 
+  useEffect(() => {
+  getProductById(id)
+    .then((data) => {
+      setProduct(data);
+    })
+    .catch((error) => {
+      console.error("Failed to load product:", error);
+      setProduct(null);
+    });
+
+  getProducts()
+    .then((data) => {
+      setProducts(data);
+    })
+    .catch((error) => {
+      console.error("Failed to load products:", error);
+    });
+}, [id]);
+
+useEffect(() => {
+  if (product) {
+    setSelectedSize(product.sizes?.[2] || product.sizes?.[0] || "");
+    setSelectedColor(product.colors?.[0] || "");
+    setSelectedImage(product.image || "");
+  }
+}, [product]);
+
+useEffect(() => {
+  if (!product) return;
+
+  document.title = `${product.title} | SHOP.CO`;
+
+  const description =
+    `${product.title} from SHOP.CO. Shop this stylish ${product.category || "fashion"} item with quality design, available in multiple sizes and colors.`;
+
+  let metaDescription = document.querySelector(
+    'meta[name="description"]'
+  );
+
+  if (!metaDescription) {
+    metaDescription = document.createElement("meta");
+    metaDescription.setAttribute("name", "description");
+    document.head.appendChild(metaDescription);
+  }
+
+  metaDescription.setAttribute(
+    "content",
+    description
+  );
+
+  let canonical = document.querySelector(
+    'link[rel="canonical"]'
+  );
+
+  if (!canonical) {
+    canonical = document.createElement("link");
+    canonical.setAttribute("rel", "canonical");
+    document.head.appendChild(canonical);
+  }
+
+  canonical.setAttribute(
+    "href",
+    window.location.href
+  );
+}, [product]);
+
   if (!product) {
     return (
       <main className="product-not-found">
@@ -131,10 +197,9 @@ function ProductDetails() {
           </div>
 
           <p className="product-description">
-            This graphic t-shirt is perfect for any occasion.
-            Crafted from a soft and breathable fabric, it offers
-            superior comfort and style.
-          </p>
+  {product.description ||
+    `${product.title} is designed for everyday comfort and style. Explore its available colors, sizes and modern design.`}
+</p>
 
           <div className="product-option">
             <h3>Select Colors</h3>
@@ -222,11 +287,10 @@ function ProductDetails() {
           <div className="tab-content">
             <h2>Product Details</h2>
 
-            <p>
-              This product is designed with comfort and everyday
-              style in mind. It features quality materials and a
-              modern fit suitable for different occasions.
-            </p>
+          <p className="product-description">
+  {product.description ||
+    `${product.title} is designed for everyday comfort and style. Explore its available colors, sizes and modern design.`}
+</p>
           </div>
         )}
 

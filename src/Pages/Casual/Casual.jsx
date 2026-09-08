@@ -17,6 +17,44 @@ function Casual() {
   const [currentPage, setCurrentPage] = useState(1);
 
   const [products, setProducts] = useState([]);
+
+useEffect(() => {
+  document.title = "Casual Clothing for Men | SHOP.CO";
+
+  const description =
+    "Explore casual clothing at SHOP.CO. Shop stylish t-shirts, shirts, jeans and more for everyday comfort and modern style.";
+
+  let metaDescription = document.querySelector(
+    'meta[name="description"]'
+  );
+
+  if (!metaDescription) {
+    metaDescription = document.createElement("meta");
+    metaDescription.setAttribute("name", "description");
+    document.head.appendChild(metaDescription);
+  }
+
+  metaDescription.setAttribute(
+    "content",
+    description
+  );
+
+  let canonical = document.querySelector(
+    'link[rel="canonical"]'
+  );
+
+  if (!canonical) {
+    canonical = document.createElement("link");
+    canonical.setAttribute("rel", "canonical");
+    document.head.appendChild(canonical);
+  }
+
+  canonical.setAttribute(
+    "href",
+    window.location.href
+  );
+}, []);
+
   useEffect(() => {
   getProducts()
     .then((data) => {
